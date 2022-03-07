@@ -216,11 +216,11 @@ int  ft_key(int code, t_cub *cub)
 
 void  ft_time(t_cub *cub)
 {
-  cub->player.move_speed = 5.0;
-  cub->player.rot_speed = 3.0;
+  cub->player.move_speed = 0.05;
+  cub->player.rot_speed = 0.03;
 }
 
-void  ft_cub3d(t_cub *cub)
+int   ft_frame(t_cub *cub)
 {
   cub->mlx.image = mlx_new_image(cub->mlx.ptr, WIN_WIDTH, WIN_HEIGHT);
   cub->mlx.buffer = mlx_get_data_addr(cub->mlx.image, &(cub->mlx.pixel_bits), &(cub->mlx.line_bytes), &(cub->mlx.endian));
@@ -228,10 +228,16 @@ void  ft_cub3d(t_cub *cub)
   cub->mlx.x = 0;
   cub->mlx.y = 0;
   ft_put_wall(cub);
-  mlx_put_image_to_window(cub->mlx.ptr, cub->mlx.win, cub->mlx.image, 0, 0);
   ft_time(cub);
-  mlx_hook(cub->mlx.win, 2, 1L<<0, ft_key, cub);
+  mlx_put_image_to_window(cub->mlx.ptr, cub->mlx.win, cub->mlx.image, 0, 0);
   mlx_destroy_image (cub->mlx.ptr, cub->mlx.image);
+  return (0);
+}
+
+void  ft_cub3d(t_cub *cub)
+{
+  mlx_loop_hook(cub->mlx.ptr, ft_frame, cub);
+  mlx_hook(cub->mlx.win, 2, 1L<<0, ft_key, cub);
   mlx_loop(cub->mlx.ptr);
 }
 
