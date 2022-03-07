@@ -108,16 +108,16 @@ void  ft_put_wall(t_cub *cub)
     cub->player.camera_x = 2 * cub->mlx.x / (double)WIN_WIDTH - 1;
     cub->player.ray_x = cub->player.dir_x + cub->player.plane_x * cub->player.camera_x;
     cub->player.ray_y = cub->player.dir_y + cub->player.plane_y * cub->player.camera_x;
-    cub->player.map_x = cub->player.pos_x;
-    cub->player.map_y = cub->player.pos_y;
+    cub->player.map_x = (int)(cub->player.pos_x);
+    cub->player.map_y = (int)(cub->player.pos_y);
     if (cub->player.ray_x == 0)
       cub->player.delta_x = 1e30;
     else
-      cub->player.delta_x = abs((int)(1 / cub->player.ray_x));
+      cub->player.delta_x = fabs(1 / cub->player.ray_x);
     if (cub->player.ray_y == 0)
       cub->player.delta_y = 1e30;
     else
-      cub->player.delta_y = abs((int)(1 / cub->player.ray_y));
+      cub->player.delta_y = fabs(1 / cub->player.ray_y);
     cub->player.hit = 0;
     if (cub->player.ray_x < 0)
     {
@@ -153,7 +153,7 @@ void  ft_put_wall(t_cub *cub)
         cub->player.map_y += cub->player.step_y;
         cub->player.side = 1;
       }
-      if (cub->map.tab[cub->player.map_x][cub->player.map_y] == '1')
+      if (cub->map.tab[cub->player.map_x][cub->player.map_y] != '0')
         cub->player.hit = 1;
     }
     if (cub->player.side == 0)
@@ -179,14 +179,14 @@ int  ft_key(int code, t_cub *cub)
 {
   double  tmp;
 
-  if (code == 119)
+  if (code == UP)
   {
     if (cub->map.tab[(int)(cub->player.pos_x + cub->player.dir_x * cub->player.move_speed)][(int)cub->player.pos_x] == '0')
       cub->player.pos_x += cub->player.dir_x * cub->player.move_speed;
     if (cub->map.tab[(int)cub->player.pos_x][(int)(cub->player.pos_y + cub->player.dir_y * cub->player.move_speed)] == '0')
       cub->player.pos_y += cub->player.dir_y * cub->player.move_speed;
   }
-  else if (code == 97)
+  else if (code == LEFT)
   {
     tmp = cub->player.dir_x;
     cub->player.dir_x = cub->player.dir_x * cos(cub->player.rot_speed) - cub->player.dir_y * sin(cub->player.rot_speed);
@@ -195,14 +195,14 @@ int  ft_key(int code, t_cub *cub)
     cub->player.plane_x = cub->player.plane_x * cos(cub->player.rot_speed) - cub->player.plane_y * sin(cub->player.rot_speed);
     cub->player.plane_y = tmp * sin(cub->player.rot_speed) + cub->player.plane_y * cos(cub->player.rot_speed);
   }
-  else if (code == 115)
+  else if (code == DOWN)
   {
     if (cub->map.tab[(int)(cub->player.pos_x - cub->player.dir_x * cub->player.move_speed)][(int)cub->player.pos_y] == '0')
       cub->player.pos_x -= cub->player.dir_x * cub->player.move_speed;
     if (cub->map.tab[(int)cub->player.pos_x][(int)(cub->player.pos_y - cub->player.dir_y * cub->player.move_speed)] == '0')
       cub->player.pos_y -= cub->player.dir_y * cub->player.move_speed;
   }
-  else if (code == 100)
+  else if (code == RIGHT)
   {
     tmp = cub->player.dir_x;
     cub->player.dir_x = cub->player.dir_x * cos(-cub->player.rot_speed) - cub->player.dir_y * sin(-cub->player.rot_speed);
@@ -216,8 +216,8 @@ int  ft_key(int code, t_cub *cub)
 
 void  ft_time(t_cub *cub)
 {
-  cub->player.move_speed = 0.05;
-  cub->player.rot_speed = 0.03;
+  cub->player.move_speed = 0.1;
+  cub->player.rot_speed = 0.06;
 }
 
 int   ft_frame(t_cub *cub)

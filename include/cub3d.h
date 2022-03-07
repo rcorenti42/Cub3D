@@ -8,6 +8,11 @@
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 400
 
+# define UP 65362
+# define DOWN 65364
+# define LEFT 65361
+# define RIGHT 65363
+
 typedef struct  s_player
 {
   double  pos_x;
