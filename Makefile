@@ -4,7 +4,7 @@ LIBFT	=	libft/libft.a
 
 CC		=	clang
 
-FLAGS	=	-O3 -Wall -Wextra -Werror
+FLAGS	=	-O3 -Wall -Wextra -Werror -fsanitize=address -g3
 
 SRCS	=	srcs/main.c \
 
