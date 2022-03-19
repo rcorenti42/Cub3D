@@ -11,10 +11,11 @@
 # define WIN_WIDTH 1500
 # define WIN_HEIGHT 800
 
-# define UP 65362
-# define DOWN 65364
-# define LEFT 65361
-# define RIGHT 65363
+# define UP 119
+# define DOWN 115
+# define LEFT 97
+# define RIGHT 100
+# define ESC 65307
 
 # define NORTH 0
 # define SOUTH 1
@@ -94,18 +95,12 @@ typedef struct  s_mlx
   char          *tex_buf;
 }               t_mlx;
 
-typedef struct  s_map
-{
-  char  **tab;
-  int   height;
-  int   width;
-}               t_map;
-
 typedef struct  s_cub
 {
   t_mlx         mlx;
-  t_map         map;
+  char          **map;
   t_player      player;
+  int           key[4];
 }               t_cub;
 
 #endif
