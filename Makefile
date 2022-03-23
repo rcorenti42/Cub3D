@@ -4,13 +4,20 @@ LIBFT	=	libft/libft.a
 
 CC		=	clang
 
-FLAGS	= -O3 -Wall -Wextra -Werror
+FLAGS	= -O3 -Wall -Wextra -Werror -g3
 
-SRCS	=	srcs/main.c \
+SRCS	=	main.c \
+			init.c \
+			raycasting.c \
+			display.c \
+			parser.c \
+			ft_split.c \
+			get_next_line.c \
+			get_next_line_utils.c
 
 INCS	=	$(addprefix include/, cub3d.h)
 
-OBJS	=	$(SRCS:.c=.o)
+OBJS	=	$(addprefix srcs/,${SRCS:.c=.o})
 
 all: $(NAME)
 

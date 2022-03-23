@@ -7,20 +7,28 @@
 # include <string.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <fcntl.h>
 
-# define WIN_WIDTH 1500
-# define WIN_HEIGHT 800
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 
 # define UP 119
 # define DOWN 115
 # define LEFT 97
 # define RIGHT 100
+# define LEFT_ARROW 65361
+# define RIGHT_ARROW 65363
 # define ESC 65307
+
+# define WALKING_SPEED 0.25
+# define ROTATION_SPEED 0.15
 
 # define NORTH 0
 # define SOUTH 1
 # define EAST 2
 # define WEST 3
+
+# define BUFFER_SIZE 8
 
 typedef struct  s_player
 {
@@ -45,8 +53,6 @@ typedef struct  s_player
   double  delta_x;
   double  delta_y;
   double  wall;
-  double  time;
-  double  old_time;
   double  move_speed;
   double  rot_speed;
 }               t_player;
@@ -72,8 +78,6 @@ typedef struct  s_mlx
   int           draw_end;
   int           endian;
   int           tex_endian;
-  int           floor_color;
-  int           ceiling_color;
   int           no_w;
   int           no_h;
   int           so_w;
@@ -97,10 +101,49 @@ typedef struct  s_mlx
 
 typedef struct  s_cub
 {
-  t_mlx         mlx;
-  char          **map;
-  t_player      player;
-  int           key[4];
+	t_mlx			mlx;
+	char			**map;
+	t_player		player;
+	int				key[6];
+	unsigned int	C;
+	unsigned int	F;
+	char			*path_to_north;
+	char			*path_to_south;
+	char			*path_to_west;
+	char			*path_to_east;
 }               t_cub;
+
+void  ft_init(t_cub *cub);
+void  init_player_val(t_cub *cub);
+void  ft_loop(t_cub*cub);
+void  if_x_side(t_cub *cub);
+void  if_y_side(t_cub *cub);
+void  ft_step(t_cub *cub);
+void  ft_raycast(t_cub *cub);
+void  ft_put_font(t_cub *cub);
+void  ft_put_wall(t_cub *cub);
+void  ft_key_walk(t_cub *cub);
+void  ft_key_rot(t_cub *cub);
+void  ft_quit(t_cub *cub, char *str, int index);
+int   ft_frame(t_cub *cub);
+int   ft_press(int code, t_cub *cub);
+int   ft_release(int code ,t_cub *cub);
+int   ft_quit_loop(t_cub *cub);
+
+
+int	ft_parser(t_cub *cub, int ac, char **av);
+
+char	*ft_strjoin2(char *s1, char *s2);
+
+// get_next_line.c || get_next_line_utils.c
+int   get_next_line(int fd, char **line);
+char  *ft_strjoin(char *s1, char *s2);
+int   ft_strlen(char *str);
+char	*ft_strdup(char *str);
+char	*ft_substr(char const *s, unsigned int start, int len, int f);
+
+//ft_split.c
+char	**ft_split(char const *s, char c);
+
 
 #endif
