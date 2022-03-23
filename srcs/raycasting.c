@@ -6,7 +6,7 @@
 /*   By: rcorenti <rcorenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:58:01 by rcorenti          #+#    #+#             */
-/*   Updated: 2022/03/23 02:23:07 by rcorenti         ###   ########.fr       */
+/*   Updated: 2022/03/23 21:17:50 by rcorenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,11 @@ void	ft_raycast(t_cub *cub)
 	if (cub->mlx.draw_end > WIN_HEIGHT)
 		cub->mlx.draw_end = WIN_HEIGHT;
 	if (cub->player.side == NORTH || cub->player.side == SOUTH)
-	{
 		cub->mlx.wall_x = cub->player.pos_y + cub->player.wall
 			* cub->player.ray_y;
-	}
 	else
-	{
 		cub->mlx.wall_x = cub->player.pos_x + cub->player.wall
 			* cub->player.ray_x;
-	}
 	cub->mlx.wall_x -= floor(cub->mlx.wall_x);
 	cub->mlx.tex_x = (int)(cub->mlx.wall_x * (double)(cub->mlx.tex_w));
 	cub->mlx.y = cub->mlx.draw_start;

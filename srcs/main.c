@@ -6,7 +6,7 @@
 /*   By: rcorenti <rcorenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:57:48 by rcorenti          #+#    #+#             */
-/*   Updated: 2022/03/23 02:33:15 by rcorenti         ###   ########.fr       */
+/*   Updated: 2022/03/23 21:18:34 by rcorenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	main(int argc, char **argv)
 
 	cub.player.pos_x = 9.5;
 	cub.player.pos_y = 9.5;
-
 
 	cub.mlx.ptr = mlx_init();
 	if (!cub.mlx.ptr)

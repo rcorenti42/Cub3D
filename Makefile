@@ -13,7 +13,8 @@ SRCS	=	main.c \
 			parser.c \
 			ft_split.c \
 			get_next_line.c \
-			get_next_line_utils.c
+			get_next_line_utils.c \
+			keys.c
 
 INCS	=	$(addprefix include/, cub3d.h)
 
