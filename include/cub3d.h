@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcorenti <rcorenti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sobouatt <sobouatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:04:59 by rcorenti          #+#    #+#             */
-/*   Updated: 2022/03/23 21:10:34 by rcorenti         ###   ########.fr       */
+/*   Updated: 2022/03/24 20:06:30 by sobouatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ typedef struct s_cub
 	char			**map;
 	t_player		player;
 	int				key[6];
-	unsigned int	C;
-	unsigned int	F;
+	unsigned int	ceiling_color;
+	unsigned int	floor_color;
 	char			*path_to_north;
 	char			*path_to_south;
 	char			*path_to_west;
@@ -144,10 +144,39 @@ int		ft_quit_loop(t_cub *cub);
 int		ft_parser(t_cub *cub, int ac, char **av);
 int		ft_strlen(char *str);
 int		get_next_line(int fd, char **line);
-char	*ft_strjoin2(char *s1, char *s2);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(char *str);
 char	*ft_substr(char const *s, unsigned int start, int len, int f);
 char	**ft_split(char const *s, char c);
+
+//parsing
+
+void	fill_player(t_cub *cub, char c);
+int	is_player(char c);
+int	ft_strcmp(const char *s1, const char *s2);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int   ft_check_file_name(char *str);
+char	*ft_strjoin2(char *s1, char *s2, int i, int j);
+char  **ft_store_map(int fd);
+int	check_around(char **map, int i, int j);
+int	check_open_map(char **map);
+int	is_charset(char c);
+int	check_chars(char **map, int *x, int *y, int p_count);
+int	ft_check_map(t_cub *cub);
+int	ft_free_map(char **map);
+void	display_map(char **map);
+char	**store_map(int ac, char **av);
+int	ft_skip_spaces(char *str, int i);
+int	check_spaces(char *str);
+int	free_textures(t_cub *cub);
+int	get_texture(t_cub *cub, char *str, int i);
+int	get_color(char *str, char **C, char **F);
+int	fill_txt(t_cub *cub);
+int		ft_is_digit(char c);
+unsigned int	get_hex(char *color, unsigned int r, unsigned int g, unsigned int b);
+void	free_either(void *F, void *C);
+int	fill_colors(t_cub *cub);
+int	fill_textures(t_cub *cub);
+int	ft_parser(t_cub *cub, int ac, char **av);
 
 #endif

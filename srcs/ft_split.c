@@ -6,15 +6,15 @@
 /*   By: sobouatt <sobouatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 00:03:08 by sobouatt          #+#    #+#             */
-/*   Updated: 2022/03/10 13:04:24 by sobouatt         ###   ########.fr       */
+/*   Updated: 2022/03/24 20:11:34 by sobouatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		wlen(char const *s, char c)
+int	wlen(char const *s, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] != c && s[i])
@@ -22,10 +22,10 @@ int		wlen(char const *s, char c)
 	return (i);
 }
 
-int		wccount(char const *s, char c)
+int	wccount(char const *s, char c)
 {
-	int i;
-	int words;
+	int	i;
+	int	words;
 
 	i = 0;
 	words = 0;
@@ -40,9 +40,9 @@ int		wccount(char const *s, char c)
 
 char	**fill(char const *s, char c, char **str, int words)
 {
-	int i;
-	int j;
-	int len;
+	int	i;
+	int	j;
+	int	len;
 
 	i = -1;
 	while (++i < words)
@@ -50,7 +50,8 @@ char	**fill(char const *s, char c, char **str, int words)
 		while (*s == c)
 			s++;
 		len = wlen(s, c);
-		if (!(str[i] = malloc(sizeof(char) * len + 1)))
+		str[i] = malloc(sizeof(char) * (len + 1));
+		if (!str[i])
 			return (NULL);
 		j = 0;
 		while (j < len)
@@ -69,7 +70,8 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	words = wccount(s, c);
-	if (!(str = malloc(sizeof(char *) * (words + 1))))
+	str = malloc(sizeof(char *) * (words + 1));
+	if (!str)
 		return (NULL);
 	str = fill(s, c, str, words);
 	return (str);

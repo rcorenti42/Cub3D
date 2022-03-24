@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcorenti <rcorenti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sobouatt <sobouatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 21:06:38 by rcorenti          #+#    #+#             */
-/*   Updated: 2022/03/23 21:15:58 by rcorenti         ###   ########.fr       */
+/*   Updated: 2022/03/24 20:01:30 by sobouatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_key_walk(t_cub *cub)
 void	ft_key_rot_2(t_cub *cub)
 {
 	double	tmp;
-	
+
 	if (cub->key[5])
 	{
 		tmp = cub->player.dir_x;

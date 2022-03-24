@@ -14,7 +14,12 @@ SRCS	=	main.c \
 			ft_split.c \
 			get_next_line.c \
 			get_next_line_utils.c \
-			keys.c
+			keys.c \
+			get_textures.c \
+			get_textures2.c \
+			fill_map.c \
+			utils.c \
+			utils2.c
 
 INCS	=	$(addprefix include/, cub3d.h)
 
