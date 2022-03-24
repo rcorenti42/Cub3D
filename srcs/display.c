@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sobouatt <sobouatt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcorenti <rcorenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:57:25 by rcorenti          #+#    #+#             */
-/*   Updated: 2022/03/24 16:14:01 by sobouatt         ###   ########.fr       */
+/*   Updated: 2022/03/24 21:52:34 by rcorenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	ft_put_font(t_cub *cub)
 	unsigned char	*tmp;
 
 	y = 0;
-	tmp = (unsigned char *)&(cub->ceiling_color);
+	tmp = (unsigned char *)&(cub->floor_color);
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;
 		if (y == WIN_HEIGHT / 2)
-			tmp = (unsigned char *)&(cub->floor_color);
+			tmp = (unsigned char *)&(cub->ceiling_color);
 		while (x < WIN_WIDTH)
 		{
 			cub->mlx.buffer[y * cub->mlx.line_bytes + x

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sobouatt <sobouatt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcorenti <rcorenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 16:15:07 by sobouatt          #+#    #+#             */
-/*   Updated: 2022/03/24 20:05:53 by sobouatt         ###   ########.fr       */
+/*   Updated: 2022/03/24 22:46:58 by rcorenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	**ft_store_map(int fd)
 	}
 	map = ft_split(tmp_map, '\n');
 	free(tmp_map);
+	close(fd);
 	return (map);
 }
 
