@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcorenti <rcorenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 11:13:56 by rcorenti          #+#    #+#             */
-/*   Updated: 2022/03/25 11:15:36 by rcorenti         ###   ########.fr       */
+/*   Created: 2022/03/25 11:14:34 by rcorenti          #+#    #+#             */
+/*   Updated: 2022/03/25 15:41:29 by rcorenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
+char	*ft_strdup(char *str)
+{
+	int		i;
+	char	*res;
 
-char	*ft_strcpy(char *dest, const char *src);
-int		ft_strcmp(const char *s1, const char *s2);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		ft_strlen(char *str);
-char	**ft_split(char const *s, char c);
-char	*ft_strdup(char *str);
-char	*ft_strjoin(char *s1, char *s2);
-
-#endif
+	i = 0;
+	if (!str)
+	{
+		res = malloc(sizeof(char));
+		if (!res)
+			return (NULL);
+		*res = '\0';
+		return (res);
+	}
+	res = malloc(sizeof(char) * (ft_strlen(str)));
+	if (!res)
+		return (NULL);
+	while (str[i] && str[i] != '\n')
+	{
+		res[i] = str[i];
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
+}

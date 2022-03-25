@@ -5,6 +5,12 @@ FLAGS = -Wall -Wextra -Werror
 HEADER = include
 
 DIR_O = ft_strcpy.c \
+		ft_split.c \
+		ft_strcmp.c \
+		ft_strncmp.c \
+		ft_strlen.c \
+		ft_strjoin.c \
+		ft_strdup.c \
 
 OBJS = ${addprefix srcs/,${DIR_O:.c=.o}}
 

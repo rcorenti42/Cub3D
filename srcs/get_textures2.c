@@ -3,49 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sobouatt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rcorenti <rcorenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:53:52 by sobouatt          #+#    #+#             */
-/*   Updated: 2022/03/24 19:54:10 by sobouatt         ###   ########.fr       */
+/*   Updated: 2022/03/25 16:35:37 by rcorenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	free_textures(t_cub *cub)
-{
-	if (cub->path_to_north != NULL)
-		free(cub->path_to_north);
-	if (cub->path_to_south != NULL)
-		free(cub->path_to_south);
-	if (cub->path_to_west != NULL)
-		free(cub->path_to_west);
-	if (cub->path_to_east != NULL)
-		free(cub->path_to_east);
-	return (1);
-}
-
-int	get_texture(t_cub *cub, char *str, int i)
+void	gain_txt_space(t_cub *cub, char *str, int i)
 {
 	if (ft_strncmp(str, "NO", 2) == 0)
 	{
 		i += ft_skip_spaces(str + i, 2);
-		cub->path_to_north = ft_strdup(str + i);
+		if (cub->path_to_north == NULL)
+			cub->path_to_north = ft_strdup(str + i);
 	}
 	else if (ft_strncmp(str, "SO", 2) == 0)
 	{
 		i += ft_skip_spaces(str + i, 2);
-		cub->path_to_south = ft_strdup(str + i);
+		if (cub->path_to_south == NULL)
+			cub->path_to_south = ft_strdup(str + i);
 	}
-	else if (ft_strncmp(str, "WE", 2) == 0)
+}
+
+int	get_texture(t_cub *cub, char *str, int i)
+{
+	gain_txt_space(cub, str, i);
+	if (ft_strncmp(str, "WE", 2) == 0)
 	{
 		i += ft_skip_spaces(str + i, 2);
-		cub->path_to_west = ft_strdup(str + i);
+		if (cub->path_to_west == NULL)
+			cub->path_to_west = ft_strdup(str + i);
 	}
 	else if (ft_strncmp(str, "EA", 2) == 0)
 	{
 		i += ft_skip_spaces(str + i, 2);
-		cub->path_to_east = ft_strdup(str + i);
+		if (cub->path_to_east == NULL)
+			cub->path_to_east = ft_strdup(str + i);
 	}
 	else
 		return (0);
@@ -64,12 +60,14 @@ int	get_color(char *str, char **ceiling_color, char **floor_color)
 	if (str[i] == 'C')
 	{
 		i += ft_skip_spaces(str + i, 1);
-		*ceiling_color = ft_strdup(str + i);
+		if (*ceiling_color == NULL)
+			*ceiling_color = ft_strdup(str + i);
 	}
 	else if (str[i] == 'F')
 	{
 		i += ft_skip_spaces(str + i, 1);
-		*floor_color = ft_strdup(str + i);
+		if (*floor_color == NULL)
+			*floor_color = ft_strdup(str + i);
 	}
 	return (0);
 }

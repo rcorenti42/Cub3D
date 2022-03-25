@@ -11,7 +11,6 @@ SRCS	=	main.c \
 			raycasting.c \
 			display.c \
 			parser.c \
-			ft_split.c \
 			get_next_line.c \
 			get_next_line_utils.c \
 			keys.c \

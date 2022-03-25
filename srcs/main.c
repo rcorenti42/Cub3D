@@ -6,7 +6,7 @@
 /*   By: rcorenti <rcorenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:57:48 by rcorenti          #+#    #+#             */
-/*   Updated: 2022/03/24 22:45:09 by rcorenti         ###   ########.fr       */
+/*   Updated: 2022/03/25 16:03:24 by rcorenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,24 @@ int	ft_quit_loop(t_cub *cub)
 	return (0);
 }
 
+int	ft_parser(t_cub *cub, int ac, char **av)
+{
+	cub->map = store_map(ac, av);
+	if (cub->map == NULL)
+		return (1);
+	if (fill_textures(cub) != 0)
+		return (1);
+	if (ft_check_map(cub) != 0)
+		return (1);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
 
-	if(argc != 2)
-		return(0);
+	if (argc != 2)
+		return (0);
 	cub.mlx.ptr = mlx_init();
 	if (!cub.mlx.ptr)
 		ft_quit(&cub, NULL, 1);

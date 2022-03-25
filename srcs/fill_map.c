@@ -6,7 +6,7 @@
 /*   By: rcorenti <rcorenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:54:45 by sobouatt          #+#    #+#             */
-/*   Updated: 2022/03/24 22:24:55 by rcorenti         ###   ########.fr       */
+/*   Updated: 2022/03/25 14:52:15 by rcorenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ int	ft_free_map(char **map)
 	if (!map)
 		return (1);
 	while (map[i] != NULL)
-		free(map[i++]);
+	{
+		free(map[i]);
+		i++;
+	}
 	free(map);
 	return (1);
 }

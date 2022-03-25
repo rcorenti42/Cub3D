@@ -6,7 +6,7 @@
 /*   By: rcorenti <rcorenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 13:57:34 by rcorenti          #+#    #+#             */
-/*   Updated: 2022/03/24 22:43:13 by rcorenti         ###   ########.fr       */
+/*   Updated: 2022/03/25 15:53:48 by rcorenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_loop(t_cub *cub)
 			&(cub->mlx.ea_w), &(cub->mlx.ea_h));
 	if (cub->mlx.no == NULL || cub->mlx.so == NULL || cub->mlx.we == NULL
 		|| cub->mlx.ea == NULL)
-		ft_quit(cub, "bad textures files", 1);
+		ft_quit(cub, "Error\nBad textures files", 1);
 	mlx_hook(cub->mlx.win, 2, 1L << 0, ft_press, cub);
 	mlx_hook(cub->mlx.win, 3, 1L << 1, ft_release, cub);
 	mlx_loop_hook(cub->mlx.ptr, ft_frame, cub);

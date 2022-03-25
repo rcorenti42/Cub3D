@@ -6,7 +6,7 @@
 /*   By: rcorenti <rcorenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 16:15:07 by sobouatt          #+#    #+#             */
-/*   Updated: 2022/03/24 22:46:58 by rcorenti         ###   ########.fr       */
+/*   Updated: 2022/03/25 16:36:37 by rcorenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,18 @@ char	**ft_store_map(int fd)
 	char	*tmp_map;
 	char	**map;
 	char	*line;
+	int		i;
 
+	i = 0;
 	gnl_rt = 1;
 	tmp_map = NULL;
 	while (gnl_rt)
 	{
 		gnl_rt = get_next_line(fd, &line);
-		tmp_map = ft_strjoin2(tmp_map, line, 0, 0);
-		tmp_map = ft_strjoin2(tmp_map, "\n", 0, 0);
+		gain_space(&i, &line, &tmp_map);
 		free(line);
 	}
-	map = ft_split(tmp_map, '\n');
+	map = ft_split(tmp_map, '[');
 	free(tmp_map);
 	close(fd);
 	return (map);
@@ -62,7 +63,7 @@ int	check_open_map(char **map)
 		j = 0;
 		while (map[i][j] != '\0')
 		{
-			if (map[i][j] != ' ' && map[i][j] != '1')
+			if (map[i][j] != ' ' && map[i][j] != '1' && map[i][j] != '\n')
 				if (check_around(map, i, j) != 0)
 					return (1);
 			j++;
@@ -70,6 +71,12 @@ int	check_open_map(char **map)
 		i++;
 	}
 	return (0);
+}
+
+void	init_both(int *x, int *y, int i, int j)
+{
+	*x = j;
+	*y = i;
 }
 
 int	check_chars(char **map, int *x, int *y, int p_count)
@@ -82,32 +89,21 @@ int	check_chars(char **map, int *x, int *y, int p_count)
 		return (1);
 	while (map[++i] != NULL)
 	{
+		if (map[i][0] == '\n')
+			return (printf("Error\nInvalid return character on the map\n"));
 		j = -1;
 		while (map[i][++j] != '\0')
 		{
 			if (is_player(map[i][j]) == 1)
 			{
 				p_count++;
-				*x = j;
-				*y = i;
+				init_both(x, y, i, j);
 			}
-			else if (is_charset(map[i][j]) != 1)
-				return (printf("Error\nInvalid character %c", map[i][j]));
+			else if (is_charset(map[i][j]) != 1 && map[i][j] != '\n')
+				return (printf("Error\nInvalid character %c\n", map[i][j]));
 		}
 	}
 	if (p_count != 1)
 		return (printf("Error\nNo player on the map\n"));
-	return (0);
-}
-
-int	ft_parser(t_cub *cub, int ac, char **av)
-{
-	cub->map = store_map(ac, av);
-	if (cub->map == NULL)
-		return (1);
-	if (fill_textures(cub) != 0)
-		return (ft_free_map(cub->map));
-	if (ft_check_map(cub) != 0)
-		return (ft_free_map(cub->map));
 	return (0);
 }

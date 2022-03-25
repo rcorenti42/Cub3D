@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sobouatt <sobouatt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcorenti <rcorenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 20:02:17 by sobouatt          #+#    #+#             */
-/*   Updated: 2022/03/24 20:04:09 by sobouatt         ###   ########.fr       */
+/*   Updated: 2022/03/25 16:36:45 by rcorenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,30 @@ char	*ft_strjoin2(char *s1, char *s2, int i, int j)
 	return (str);
 }
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	free_textures(t_cub *cub)
 {
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	if (cub->path_to_north != NULL)
+		free(cub->path_to_north);
+	if (cub->path_to_south != NULL)
+		free(cub->path_to_south);
+	if (cub->path_to_west != NULL)
+		free(cub->path_to_west);
+	if (cub->path_to_east != NULL)
+		free(cub->path_to_east);
+	return (1);
 }
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	gain_space(int *i, char **line, char **tmp_map)
 {
-	size_t	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i] && i < n -1)
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	if (*i <= 6 && (*line)[0] != '\0')
+	{
+		*tmp_map = ft_strjoin2(*tmp_map, *line, 0, 0);
+		*tmp_map = ft_strjoin2(*tmp_map, "\n[", 0, 0);
+		(*i)++;
+	}
+	else if (*i > 6)
+	{
+		*tmp_map = ft_strjoin2(*tmp_map, *line, 0, 0);
+		*tmp_map = ft_strjoin2(*tmp_map, "\n[", 0, 0);
+	}
 }

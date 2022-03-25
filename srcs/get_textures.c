@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sobouatt <sobouatt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rcorenti <rcorenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:51:24 by sobouatt          #+#    #+#             */
-/*   Updated: 2022/03/24 20:58:35 by sobouatt         ###   ########.fr       */
+/*   Updated: 2022/03/25 16:13:59 by rcorenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,19 @@ int	fill_txt(t_cub *cub)
 unsigned int	get_bits(char *color, int *i)
 {
 	unsigned int	bit;
+	int				tmp;
 
 	bit = 0;
+	tmp = 0;
 	while (ft_is_digit(color[*i]))
 	{
+		tmp++;
 		if (bit != 0)
 			bit *= 10;
 		bit += color[(*i)++] - '0';
 	}
+	if (!tmp)
+		return (256);
 	return (bit);
 }
 
@@ -57,6 +62,8 @@ unsigned int	get_hex(char *color, unsigned int r,
 	if (color[i++] != ',' || g > 255)
 		return (0);
 	b = get_bits(color, &i);
+	if (b > 255 || color[i] != '\0')
+		return (0);
 	rgb = 65536 * r + 256 * g + b;
 	if (rgb == 0)
 		rgb = 65793;
@@ -78,14 +85,16 @@ int	fill_colors(t_cub *cub)
 	if (floor_color == NULL || ceiling_color == NULL)
 	{
 		free_either(floor_color, ceiling_color);
-		return (printf("Error\nProblen with some with floor or ceiling color\n"));
+		return (printf("Error\nProblen with floor or ceiling color\n"));
 	}
 	cub->floor_color = get_hex(floor_color, 0, 0, 0);
 	cub->ceiling_color = get_hex(ceiling_color, 0, 0, 0);
 	if (cub->ceiling_color == 0 || cub->floor_color == 0)
+	{
+		free_either(floor_color, ceiling_color);
 		return (printf("Error\nProblem with floor or ceiling color\n"));
-	free(floor_color);
-	free(ceiling_color);
+	}
+	free_either(floor_color, ceiling_color);
 	return (0);
 }
 
@@ -96,8 +105,8 @@ int	fill_textures(t_cub *cub)
 	cub->path_to_west = NULL;
 	cub->path_to_east = NULL;
 	if (fill_txt(cub) != 0)
-		return (free_textures(cub));
+		return (1);
 	if (fill_colors(cub) != 0)
-		return (free_textures(cub));
+		return (1);
 	return (0);
 }
