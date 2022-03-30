@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcorenti <rcorenti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sobouatt <sobouatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:54:45 by sobouatt          #+#    #+#             */
-/*   Updated: 2022/03/25 14:52:15 by rcorenti         ###   ########.fr       */
+/*   Updated: 2022/03/28 22:37:25 by sobouatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ char	**store_map(int ac, char **av)
 	if (ft_check_file_name(av[1]) != 0)
 	{
 		printf("Error\nNot a .cub file\n");
+		return (NULL);
+	}
+	if (open(av[1], O_DIRECTORY) > 0)
+	{
+		printf("Error\nFile is a directory\n");
 		return (NULL);
 	}
 	fd = open(av[1], O_RDONLY);

@@ -4,7 +4,7 @@ LIBFT	=	libft/libft.a
 
 CC		=	clang
 
-FLAGS	= -O3 -Wall -Wextra -Werror -g3
+FLAGS	= -Wall -Wextra -Werror
 
 SRCS	=	main.c \
 			init.c \

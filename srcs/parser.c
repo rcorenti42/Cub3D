@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcorenti <rcorenti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sobouatt <sobouatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 16:15:07 by sobouatt          #+#    #+#             */
-/*   Updated: 2022/03/25 16:36:37 by rcorenti         ###   ########.fr       */
+/*   Updated: 2022/03/28 23:33:49 by sobouatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,18 @@ int	check_around(char **map, int i, int j)
 {
 	if (i == 0 || j == 0)
 		return (1);
-	if (ft_strlen(map[i]) - 1 == j)
+	if (map[i + 1] == NULL || map[i][j + 1] == '\0')
 		return (1);
-	if (map[i + 1] == NULL)
+	if (map[i][j + 1] == '\n' || map[i][j + 1] == ' ')
 		return (1);
-	if (ft_strlen(map[i - 1]) - 1 < j || ft_strlen(map[i + 1]) - 1 < j)
+	if (map[i - 1][j] == '\n' || map[i - 1][j] == ' ')
 		return (1);
-	if (map[i + 1][j] == ' ' || map[i - 1][j] == ' '
-		|| map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
+	if (map[i + 1][j] == ' ' || map[i + 1][j] == '\n')
 		return (1);
+	if (map[i][j - 1] == '\n')
+		return (1);
+	if (map[i - 1][0] == '\n')
+		return (0);
 	return (0);
 }
 
@@ -104,6 +107,6 @@ int	check_chars(char **map, int *x, int *y, int p_count)
 		}
 	}
 	if (p_count != 1)
-		return (printf("Error\nNo player on the map\n"));
+		return (printf("Error\nInvalid number of players on the map\n"));
 	return (0);
 }
